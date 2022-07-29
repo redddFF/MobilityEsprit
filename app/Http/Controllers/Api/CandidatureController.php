@@ -24,7 +24,8 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        return CandidatureResource::collection(Candidature::paginate());
+        
+        return CandidatureResource::collection(Candidature::all());
     }
 
     /**
@@ -47,99 +48,20 @@ class CandidatureController extends Controller
             $user->registred =1;
             $user->save();
 
-            $ConfirmationOfHomeInstitution = null;
-            $url_ConfirmationOfHomeInstitution = null;
-
-            $LearningAgreement = null;
-            $url_LearningAgreement = null;
-
-            $TranscriptOfRecords = null;
-            $url_TranscriptOfRecords = null;
-
-            $Cv = null;
-            $url_Cv = null;
-
-            $CertificateOfLanguageCompetence = null;
-            $url_CertificateOfLanguageCompetence = null;
-
-            $CetificateOfBachelorMasterDegree = null;
-            $url_CetificateOfBachelorMasterDegree = null;
-
-            $ConfirmationOfRegistrationForStudentDormitory = null;
-            $url_ConfirmationOfRegistrationForStudentDormitory = null;
-
-            $PersonalPhoto = null;
-            $url_PersonalPhoto = null;
-
-            $Passport = null;
-            $url_Passport = null;
+            $file = null;
+            $url_file = null;
 
 
 
-            if (($request->file('ConfirmationOfHomeInstitution') !== null) && ($request->file('ConfirmationOfHomeInstitution')->isValid())) {
+            if (($request->file('file') !== null) && ($request->file('file')->isValid())) {
 
-                $ext1 = $request->file('ConfirmationOfHomeInstitution')->extension();
+                $ext1 = $request->file('file')->extension();
                 $fileName1 = Str::uuid() . '.' . $ext1;
-                $ConfirmationOfHomeInstitution = $request->file('ConfirmationOfHomeInstitution')->storeAs('public/images', $fileName1);
-                $url_ConfirmationOfHomeInstitution = env('APP_URL') . Storage::url($ConfirmationOfHomeInstitution);
+                $file = $request->file('file')->storeAs('public/images', $fileName1);
+                $url_file = env('APP_URL') . Storage::url($file);
             }
 
-            if (($request->file('LearningAgreement') !== null) && ($request->file('LearningAgreement')->isValid())) {
-
-                $ext2 = $request->file('LearningAgreement')->extension();
-                $fileName2 = Str::uuid() . '.' . $ext2;
-                $LearningAgreement = $request->file('LearningAgreement')->storeAs('public/images', $fileName2);
-                $url_LearningAgreement = env('APP_URL') . Storage::url($LearningAgreement);
-            }
-            if (($request->file('TranscriptOfRecords') !== null) && ($request->file('TranscriptOfRecords')->isValid())) {
-
-                $ext3 = $request->file('TranscriptOfRecords')->extension();
-                $fileName3 = Str::uuid() . '.' . $ext3;
-                $TranscriptOfRecords = $request->file('TranscriptOfRecords')->storeAs('public/images', $fileName3);
-                $url_TranscriptOfRecords = env('APP_URL') . Storage::url($TranscriptOfRecords);
-            }
-            if (($request->file('Cv') !== null) && ($request->file('Cv')->isValid())) {
-
-                $ext4 = $request->file('Cv')->extension();
-                $fileName4 = Str::uuid() . '.' . $ext4;
-                $Cv = $request->file('Cv')->storeAs('public/images', $fileName4);
-                $url_Cv = env('APP_URL') . Storage::url($Cv);
-            }
-            if (($request->file('CertificateOfLanguageCompetence') !== null) && ($request->file('CertificateOfLanguageCompetence')->isValid())) {
-
-                $ext5 = $request->file('CertificateOfLanguageCompetence')->extension();
-                $fileName5 = Str::uuid() . '.' . $ext5;
-                $CertificateOfLanguageCompetence = $request->file('CertificateOfLanguageCompetence')->storeAs('public/images', $fileName5);
-                $url_CertificateOfLanguageCompetence = env('APP_URL') . Storage::url($CertificateOfLanguageCompetence);
-            }
-            if (($request->file('CetificateOfBachelorMasterDegree') !== null) && ($request->file('CetificateOfBachelorMasterDegree')->isValid())) {
-
-                $ext6 = $request->file('CetificateOfBachelorMasterDegree')->extension();
-                $fileName6 = Str::uuid() . '.' . $ext6;
-                $CetificateOfBachelorMasterDegree = $request->file('CetificateOfBachelorMasterDegree')->storeAs('public/images', $fileName6);
-                $url_CetificateOfBachelorMasterDegree = env('APP_URL') . Storage::url($CetificateOfBachelorMasterDegree);
-            }
-            if (($request->file('ConfirmationOfRegistrationForStudentDormitory') !== null) && ($request->file('ConfirmationOfRegistrationForStudentDormitory')->isValid())) {
-
-                $ext7 = $request->file('ConfirmationOfRegistrationForStudentDormitory')->extension();
-                $fileName7 = Str::uuid() . '.' . $ext7;
-                $ConfirmationOfRegistrationForStudentDormitory = $request->file('ConfirmationOfRegistrationForStudentDormitory')->storeAs('public/images', $fileName7);
-                $url_ConfirmationOfRegistrationForStudentDormitory = env('APP_URL') . Storage::url($ConfirmationOfRegistrationForStudentDormitory);
-            }
-            if (($request->file('PersonalPhoto') !== null) && ($request->file('PersonalPhoto')->isValid())) {
-
-                $ext8 = $request->file('PersonalPhoto')->extension();
-                $fileName8 = Str::uuid() . '.' . $ext8;
-                $PersonalPhoto = $request->file('PersonalPhoto')->storeAs('public/images', $fileName8);
-                $url_PersonalPhoto = env('APP_URL') . Storage::url($PersonalPhoto);
-            }
-            if (($request->file('Passport') !== null) && ($request->file('Passport')->isValid())) {
-
-                $ext9 = $request->file('Passport')->extension();
-                $fileName9 = Str::uuid() . '.' . $ext9;
-                $Passport = $request->file('Passport')->storeAs('public/images', $fileName9);
-                $url_Passport = env('APP_URL') . Storage::url($Passport);
-            }
+        
 
             $Candidature = Candidature::create([
                 'MobilityType' => $validated['MobilityType'],
@@ -190,24 +112,8 @@ class CandidatureController extends Controller
                 'ProposedStudyPlanName' => $validated['ProposedStudyPlanName'],
                 'ProposedStudyPlanECTS' => $validated['ProposedStudyPlanECTS'],
                 'AdditionalData' => $validated['AdditionalData'],
-                'ConfirmationOfHomeInstitution' => $ConfirmationOfHomeInstitution,
-                'url_ConfirmationOfHomeInstitution' => $url_ConfirmationOfHomeInstitution,
-                'LearningAgreement' => $LearningAgreement,
-                'url_LearningAgreement' => $url_LearningAgreement,
-                'TranscriptOfRecords' => $TranscriptOfRecords,
-                'url_TranscriptOfRecords' => $url_TranscriptOfRecords,
-                'Cv' => $Cv,
-                'url_Cv' => $url_Cv,
-                'CertificateOfLanguageCompetence' => $CertificateOfLanguageCompetence,
-                'url_CertificateOfLanguageCompetence' => $url_CertificateOfLanguageCompetence,
-                'CetificateOfBachelorMasterDegree' => $CetificateOfBachelorMasterDegree,
-                'url_CetificateOfBachelorMasterDegree' => $url_CetificateOfBachelorMasterDegree,
-                'ConfirmationOfRegistrationForStudentDormitory' => $ConfirmationOfRegistrationForStudentDormitory,
-                'url_ConfirmationOfRegistrationForStudentDormitory' => $url_ConfirmationOfRegistrationForStudentDormitory,
-                'PersonalPhoto' => $PersonalPhoto,
-                'url_PersonalPhoto' => $url_PersonalPhoto,
-                'Passport' => $Passport,
-                'url_Passport' => $url_Passport,
+                'file' => $file,
+                'url_file' => $url_file,
                 'user_id' => $user->id
 
 
@@ -257,99 +163,21 @@ class CandidatureController extends Controller
              $user->save();
              
  
-             $ConfirmationOfHomeInstitution =$Candidature->ConfirmationOfHomeInstitution;
-             $url_ConfirmationOfHomeInstitution =$Candidature->url_ConfirmationOfHomeInstitution;
- 
-             $LearningAgreement = $Candidature->LearningAgreement;
-             $url_LearningAgreement = $Candidature->url_LearningAgreement;
- 
-             $TranscriptOfRecords =$Candidature->TranscriptOfRecords;
-             $url_TranscriptOfRecords = $Candidature->url_TranscriptOfRecords;
- 
-             $Cv = $Candidature->Cv;
-             $url_Cv = $Candidature->url_Cv;
- 
-             $CertificateOfLanguageCompetence = $Candidature->CertificateOfLanguageCompetence;
-             $url_CertificateOfLanguageCompetence = $Candidature->url_CertificateOfLanguageCompetence;
- 
-             $CetificateOfBachelorMasterDegree = $Candidature->CetificateOfBachelorMasterDegree;
-             $url_CetificateOfBachelorMasterDegree = $Candidature->url_CetificateOfBachelorMasterDegree;
- 
-             $ConfirmationOfRegistrationForStudentDormitory = $Candidature->ConfirmationOfRegistrationForStudentDormitory;
-             $url_ConfirmationOfRegistrationForStudentDormitory = $Candidature->url_ConfirmationOfRegistrationForStudentDormitory;
- 
-             $PersonalPhoto = $Candidature->PersonalPhoto;
-             $url_PersonalPhoto = $Candidature->url_PersonalPhoto;
- 
-             $Passport =$Candidature->Passport;
-             $url_Passport = $Candidature->url_Passport;
+             $file=$Candidature->file;
+             $url_file =$Candidature->url_file;
  
  
  
-             if (($request->file('ConfirmationOfHomeInstitution') !== null) && ($request->file('ConfirmationOfHomeInstitution')->isValid())) {
  
-                 $ext1 = $request->file('ConfirmationOfHomeInstitution')->extension();
-                 $fileName1 = Str::uuid() . '.' . $ext1;
-                 $ConfirmationOfHomeInstitution = $request->file('ConfirmationOfHomeInstitution')->storeAs('public/images', $fileName1);
-                 $url_ConfirmationOfHomeInstitution = env('APP_URL') . Storage::url($ConfirmationOfHomeInstitution);
+             if (($request->file('file') !== null) && ($request->file('file')->isValid())) {
+ 
+                 $ext= $request->file('file')->extension();
+                 $fileName = Str::uuid() . '.' . $ext;
+                 $file= $request->file('file')->storeAs('public/images',$fileName);
+                 $url_file= env('APP_URL') . Storage::url($file);
              }
  
-             if (($request->file('LearningAgreement') !== null) && ($request->file('LearningAgreement')->isValid())) {
- 
-                 $ext2 = $request->file('LearningAgreement')->extension();
-                 $fileName2 = Str::uuid() . '.' . $ext2;
-                 $LearningAgreement = $request->file('LearningAgreement')->storeAs('public/images', $fileName2);
-                 $url_LearningAgreement = env('APP_URL') . Storage::url($LearningAgreement);
-             }
-             if (($request->file('TranscriptOfRecords') !== null) && ($request->file('TranscriptOfRecords')->isValid())) {
- 
-                 $ext3 = $request->file('TranscriptOfRecords')->extension();
-                 $fileName3 = Str::uuid() . '.' . $ext3;
-                 $TranscriptOfRecords = $request->file('TranscriptOfRecords')->storeAs('public/images', $fileName3);
-                 $url_TranscriptOfRecords = env('APP_URL') . Storage::url($TranscriptOfRecords);
-             }
-             if (($request->file('Cv') !== null) && ($request->file('Cv')->isValid())) {
- 
-                 $ext4 = $request->file('Cv')->extension();
-                 $fileName4 = Str::uuid() . '.' . $ext4;
-                 $Cv = $request->file('Cv')->storeAs('public/images', $fileName4);
-                 $url_Cv = env('APP_URL') . Storage::url($Cv);
-             }
-             if (($request->file('CertificateOfLanguageCompetence') !== null) && ($request->file('CertificateOfLanguageCompetence')->isValid())) {
- 
-                 $ext5 = $request->file('CertificateOfLanguageCompetence')->extension();
-                 $fileName5 = Str::uuid() . '.' . $ext5;
-                 $CertificateOfLanguageCompetence = $request->file('CertificateOfLanguageCompetence')->storeAs('public/images', $fileName5);
-                 $url_CertificateOfLanguageCompetence = env('APP_URL') . Storage::url($CertificateOfLanguageCompetence);
-             }
-             if (($request->file('CetificateOfBachelorMasterDegree') !== null) && ($request->file('CetificateOfBachelorMasterDegree')->isValid())) {
- 
-                 $ext6 = $request->file('CetificateOfBachelorMasterDegree')->extension();
-                 $fileName6 = Str::uuid() . '.' . $ext6;
-                 $CetificateOfBachelorMasterDegree = $request->file('CetificateOfBachelorMasterDegree')->storeAs('public/images', $fileName6);
-                 $url_CetificateOfBachelorMasterDegree = env('APP_URL') . Storage::url($CetificateOfBachelorMasterDegree);
-             }
-             if (($request->file('ConfirmationOfRegistrationForStudentDormitory') !== null) && ($request->file('ConfirmationOfRegistrationForStudentDormitory')->isValid())) {
- 
-                 $ext7 = $request->file('ConfirmationOfRegistrationForStudentDormitory')->extension();
-                 $fileName7 = Str::uuid() . '.' . $ext7;
-                 $ConfirmationOfRegistrationForStudentDormitory = $request->file('ConfirmationOfRegistrationForStudentDormitory')->storeAs('public/images', $fileName7);
-                 $url_ConfirmationOfRegistrationForStudentDormitory = env('APP_URL') . Storage::url($ConfirmationOfRegistrationForStudentDormitory);
-             }
-             if (($request->file('PersonalPhoto') !== null) && ($request->file('PersonalPhoto')->isValid())) {
- 
-                 $ext8 = $request->file('PersonalPhoto')->extension();
-                 $fileName8 = Str::uuid() . '.' . $ext8;
-                 $PersonalPhoto = $request->file('PersonalPhoto')->storeAs('public/images', $fileName8);
-                 $url_PersonalPhoto = env('APP_URL') . Storage::url($PersonalPhoto);
-             }
-             if (($request->file('Passport') !== null) && ($request->file('Passport')->isValid())) {
- 
-                 $ext9 = $request->file('Passport')->extension();
-                 $fileName9 = Str::uuid() . '.' . $ext9;
-                 $Passport = $request->file('Passport')->storeAs('public/images', $fileName9);
-                 $url_Passport = env('APP_URL') . Storage::url($Passport);
-             }
+    
  
              $Candidature->update([
                  'MobilityType' => $validated['MobilityType'],
@@ -400,24 +228,8 @@ class CandidatureController extends Controller
                  'ProposedStudyPlanName' => $validated['ProposedStudyPlanName'],
                  'ProposedStudyPlanECTS' => $validated['ProposedStudyPlanECTS'],
                  'AdditionalData' => $validated['AdditionalData'],
-                 'ConfirmationOfHomeInstitution' => $ConfirmationOfHomeInstitution,
-                 'url_ConfirmationOfHomeInstitution' => $url_ConfirmationOfHomeInstitution,
-                 'LearningAgreement' => $LearningAgreement,
-                 'url_LearningAgreement' => $url_LearningAgreement,
-                 'TranscriptOfRecords' => $TranscriptOfRecords,
-                 'url_TranscriptOfRecords' => $url_TranscriptOfRecords,
-                 'Cv' => $Cv,
-                 'url_Cv' => $url_Cv,
-                 'CertificateOfLanguageCompetence' => $CertificateOfLanguageCompetence,
-                 'url_CertificateOfLanguageCompetence' => $url_CertificateOfLanguageCompetence,
-                 'CetificateOfBachelorMasterDegree' => $CetificateOfBachelorMasterDegree,
-                 'url_CetificateOfBachelorMasterDegree' => $url_CetificateOfBachelorMasterDegree,
-                 'ConfirmationOfRegistrationForStudentDormitory' => $ConfirmationOfRegistrationForStudentDormitory,
-                 'url_ConfirmationOfRegistrationForStudentDormitory' => $url_ConfirmationOfRegistrationForStudentDormitory,
-                 'PersonalPhoto' => $PersonalPhoto,
-                 'url_PersonalPhoto' => $url_PersonalPhoto,
-                 'Passport' => $Passport,
-                 'url_Passport' => $url_Passport,
+                 'file' => $file,
+                 'url_file' => $url_file,
                  'user_id' => $user->id
  
  
