@@ -43,12 +43,12 @@ return new class extends Migration
             $table->string('InstitutionalCoordinatorFax')->nullable();
             $table->string('InstitutionalCoordinatorEmail')->nullable();
             $table->string('ExchangeProgram')->nullable();
-            $table->boolean('DoubleDegree')->nullable();
+            $table->string('DoubleDegree')->nullable();
             $table->string('AppDepartment')->nullable();
             $table->string('AppProgram')->nullable();
             $table->string('AppSubject')->nullable();
             $table->string('AppAdditionalInfo')->nullable();
-            $table->boolean('AppStudentDormitory')->nullable();
+            $table->string('AppStudentDormitory')->nullable();
             $table->string('CurrentStudies')->nullable();
             $table->string('FieldStudies')->nullable();
             $table->integer('NumberYearsCompleted')->nullable();

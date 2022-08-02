@@ -98,7 +98,7 @@
                     <label
                         for="LastName"
                         class="block text-sm font-medium text-gray-700"
-                        >Last Name</label
+                        >Name</label
                     >
                     <div class="mt-1">
                         <input
@@ -1069,8 +1069,8 @@
                     id="DoubleDegree"
                     v-model="candidature.DoubleDegree"
                 >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
                 </select>
             </div>
 
@@ -1150,8 +1150,8 @@
                     id="AppStudentDormitory"
                     v-model="candidature.AppStudentDormitory"
                 >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>
             </div>
 
@@ -1208,20 +1208,23 @@
                 </div>
             </div>
 
-            <div>
-                <label
-                    for="InstructionLanguage"
-                    class="block text-sm font-medium text-gray-700"
-                    >Instruction Language</label
-                >
-                <div class="mt-1">
-                    <input
-                        type="text"
-                        name="InstructionLanguage"
-                        id="InstructionLanguage"
-                        class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+           <div class="col">
+                <div class="form-group col-md-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700"
+                        for="InstructionLanguage"
+                        >InstructionLanguage</label
+                    >
+                    <select
+                        class="form-control"
+                        id="NumberYearsCompleted"
                         v-model="candidature.InstructionLanguage"
-                    />
+                    >
+                        <option value="French">French</option>
+                        <option value="English">English</option>
+                        <option value="Arabic">Arabic</option>
+                      
+                    </select>
                 </div>
             </div>
             <div class="col">

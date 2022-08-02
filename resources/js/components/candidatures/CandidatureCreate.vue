@@ -5,7 +5,7 @@
                 <label
                     for="StudentId"
                     class="block text-sm font-medium text-gray-700"
-                    >Student Id</label
+                     >Student Id</label
                 >
                 <div class="mt-1">
                     <input
@@ -13,7 +13,7 @@
                         name="StudentId"
                         id="StudentId"
                         class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        v-model="form.StudenntId"
+                        v-model="form.StudenntId" required
                     />
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <label
                     for="PersonalId"
                     class="block text-sm font-medium text-gray-700"
-                    >Personal Id</label
+                     >Personal Id</label
                 >
                 <div class="mt-1">
                     <input
@@ -29,8 +29,8 @@
                         name="PersonalId"
                         id="PersonalId"
                         class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        v-model="form.PersonalId"
-                    />
+                        v-model="form.PersonalId" required
+                   />
                 </div>
             </div>
             <div>
@@ -97,7 +97,7 @@
                     <label
                         for="LastName"
                         class="block text-sm font-medium text-gray-700"
-                        >Last Name</label
+                        >Name</label
                     >
                     <div class="mt-1">
                         <input
@@ -1067,8 +1067,8 @@
                     id="DoubleDegree"
                     v-model="form.DoubleDegree"
                 >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
                 </select>
             </div>
 
@@ -1148,8 +1148,8 @@
                     id="AppStudentDormitory"
                     v-model="form.AppStudentDormitory"
                 >
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="YES">Yes</option>
+                    <option value="NO">No</option>
                 </select>
             </div>
 
@@ -1206,22 +1206,31 @@
                 </div>
             </div>
 
-            <div>
-                <label
-                    for="InstructionLanguage"
-                    class="block text-sm font-medium text-gray-700"
-                    >Instruction Language</label
-                >
-                <div class="mt-1">
-                    <input
-                        type="text"
-                        name="InstructionLanguage"
-                        id="InstructionLanguage"
-                        class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      
+
+<div class="col">
+                <div class="form-group col-md-4">
+                    <label
+                        class="block text-sm font-medium text-gray-700"
+                        for="InstructionLanguage"
+                        >InstructionLanguage</label
+                    >
+                    <select
+                        class="form-control"
+                        id="NumberYearsCompleted"
                         v-model="form.InstructionLanguage"
-                    />
+                    >
+                        <option value="French">French</option>
+                        <option value="English">English</option>
+                        <option value="Arabic">Arabic</option>
+                      
+                    </select>
                 </div>
             </div>
+
+
+
+
             <div class="col">
                 <div class="form-group col-md-4">
                     <label

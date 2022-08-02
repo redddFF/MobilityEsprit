@@ -24,8 +24,15 @@ class CandidatureController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        if ($user->Status=='Admin'){
+            return CandidatureResource::collection(Candidature::all());
+        }
+        else{
+            return CandidatureResource::collection(Auth()->user()->candidatures()->paginate());
+        }
         
-        return CandidatureResource::collection(Candidature::all());
+        
     }
 
     /**
@@ -36,17 +43,16 @@ class CandidatureController extends Controller
      */
     public function store(CandidatureRequest $request)
     {
-        $user=User::find(1);
+      //  $user=User::find(1);
 
-      // $user = Auth::user();
+   $user = Auth::user();
 
         DB::beginTransaction();
         try {
 
             $validated = $request->validated();
          
-            $user->registred =1;
-            $user->save();
+         
 
             $file = null;
             $url_file = null;
@@ -150,17 +156,16 @@ class CandidatureController extends Controller
      */
     public function update(CandidatureRequest $request, $id)
     {
-        $user=User::find(1);
+      //  $user=User::find(1);
 
-         //$user = Auth::user();
+         $user = Auth::user();
         $Candidature=Candidature::find($id);
          DB::beginTransaction();
          try {
  
              $validated = $request->validated();
           
-             $user->registred =1;
-             $user->save();
+        
              
  
              $file=$Candidature->file;
